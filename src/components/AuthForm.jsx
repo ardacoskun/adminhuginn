@@ -1,0 +1,127 @@
+import React from "react";
+import PropTypes from "prop-types";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Container,
+  FormControl,
+  FormLabel,
+  Heading,
+  HStack,
+  Input,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
+import { PasswordField, Logo, CustomButton } from "../components";
+
+const AuthForm = ({ isLogin }) => {
+  return (
+    <Container
+      maxW="lg"
+      py={{
+        base: "12",
+        md: "24",
+      }}
+      px={{
+        base: "0",
+        sm: "8",
+      }}
+    >
+      <Stack spacing="8">
+        <Box
+          py={{
+            base: "0",
+            sm: "8",
+          }}
+          px={{
+            base: "4",
+            sm: "10",
+          }}
+          bg={{
+            base: "#fff",
+            sm: "bg-surface",
+          }}
+          boxShadow={{
+            base: "none",
+            sm: "md",
+          }}
+          borderRadius={{
+            base: "none",
+            sm: "xl",
+          }}
+        >
+          <Stack spacing="6">
+            <Stack
+              spacing="6"
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Logo width="50%" height="50%" />
+              <Stack
+                spacing={{
+                  base: "2",
+                  md: "3",
+                }}
+                textAlign="center"
+              >
+                <Heading
+                  size={{
+                    base: "xs",
+                    md: "md",
+                  }}
+                >
+                  {isLogin ? "Login" : "Register"}
+                </Heading>
+                <HStack spacing="1" justify="center">
+                  <Text color="muted">
+                    {isLogin
+                      ? "Don't have an account?"
+                      : "Already have an account?"}
+                  </Text>
+                  <Button variant="link" colorScheme="blue">
+                    {isLogin ? "Sign Up" : "Login"}
+                  </Button>
+                </HStack>
+              </Stack>
+            </Stack>
+            <Stack spacing="5">
+              {!isLogin ? (
+                <FormControl>
+                  <FormLabel htmlFor="email">Username</FormLabel>
+                  <Input id="username" type="text" />
+                </FormControl>
+              ) : null}
+              <FormControl>
+                <FormLabel htmlFor="email">Email</FormLabel>
+                <Input id="email" type="email" />
+              </FormControl>
+              <PasswordField />
+            </Stack>
+            <HStack justify="space-between">
+              <Checkbox defaultChecked>Remember me</Checkbox>
+              {isLogin ? (
+                <Button variant="link" colorScheme="blue" size="sm">
+                  Forgot password?
+                </Button>
+              ) : null}
+            </HStack>
+            <CustomButton text={isLogin ? "Login" : "Register"} />
+          </Stack>
+        </Box>
+      </Stack>
+    </Container>
+  );
+};
+
+AuthForm.prototypes = {
+  isLogin: PropTypes.bool,
+};
+
+AuthForm.defaultProps = {
+  isLogin: true,
+};
+
+export default AuthForm;

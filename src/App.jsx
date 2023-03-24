@@ -1,7 +1,7 @@
-import "./App.css";
+import { Register } from "./pages";
 
 function App() {
-  return <div>HuginnAdmin</div>;
+  return <Register />;
 }
 
 export default App;
