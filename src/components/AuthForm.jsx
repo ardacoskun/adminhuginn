@@ -14,6 +14,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { PasswordField, Logo, CustomButton } from "../components";
+import { Link } from "react-router-dom";
 
 const AuthForm = ({ isLogin }) => {
   return (
@@ -81,9 +82,11 @@ const AuthForm = ({ isLogin }) => {
                       ? "Don't have an account?"
                       : "Already have an account?"}
                   </Text>
-                  <Button variant="link" colorScheme="blue">
-                    {isLogin ? "Sign Up" : "Login"}
-                  </Button>
+                  <Link to={`/${isLogin ? "register" : "login"}`}>
+                    <Button variant="link" colorScheme="blue">
+                      {isLogin ? "Sign Up" : "Login"}
+                    </Button>
+                  </Link>
                 </HStack>
               </Stack>
             </Stack>
