@@ -17,13 +17,14 @@ const CustomButton = ({ text, loadingText, onClick, isLoading }) => {
 };
 
 Button.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
   loadingText: PropTypes.string,
   onClick: PropTypes.func,
   isLoading: PropTypes.bool,
 };
 
 Button.defaultProps = {
+  text: "",
   isLoading: false,
   loadingText: "",
   onClick: () => {},
