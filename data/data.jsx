@@ -41,22 +41,26 @@ export const socialMedia = [
 
 export const enviromentData = [
   {
+    id: 1,
     value: 0,
-    label: "Mainnet",
+    name: "Mainnet",
   },
   {
+    id: 2,
     value: 1,
-    label: "Testnet",
+    name: "Testnet",
   },
 ];
 
 export const networkStatus = [
   {
+    id: 1,
     value: 0,
-    label: "Stake Now",
+    name: "Stake Now",
   },
   {
+    id: 2,
     value: 1,
-    label: "Soon",
+    name: "Soon",
   },
 ];
