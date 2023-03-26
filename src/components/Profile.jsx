@@ -11,12 +11,10 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import CustomInput from "./ui/CustomInput";
-import CustomNumberInput from "./ui/CustomNumberInput";
 import CustomSelectInput from "./ui/CustomSelectInput";
-import CustomTextArea from "./ui/CustomTextArea";
-import { enviromentData, networkStatus } from "../../data/data";
-
-const NetworkDetail = (props) => {
+import { profileStatus } from "../../data/data";
+import { PasswordField } from "./ui/PasswordInput";
+const Profile = (props) => {
   const isDesktop = useBreakpointValue({
     base: false,
     lg: true,
@@ -34,36 +32,27 @@ const NetworkDetail = (props) => {
           <Box>
             <Image
               boxSize={isDesktop ? "400px" : "250px"}
-              src="https://bit.ly/dan-abramov"
-              alt="Dan Abramov"
+              src="../images/avatar.jpg"
+              alt="user"
               borderRadius="10px"
               margin={!isDesktop ? "auto" : ""}
             />
           </Box>
           <Box flex="1" display="flex" flexDirection="column" gap="15px">
             <Box>
-              <FormLabel>Network Name</FormLabel>
-              <CustomInput placeholder="Network name" />
+              <FormLabel>Username</FormLabel>
+              <CustomInput placeholder="Username" />
             </Box>
             <Box>
-              <FormLabel>%APR</FormLabel>
-              <CustomNumberInput />
+              <FormLabel>Email</FormLabel>
+              <CustomInput placeholder="email" isReadOnly />
             </Box>
             <Box>
-              <FormLabel>Mainnet-Testnet</FormLabel>
-              <CustomSelectInput options={enviromentData} />
+              <FormLabel>Account Status</FormLabel>
+              <CustomSelectInput options={profileStatus} />
             </Box>
             <Box>
-              <FormLabel>Network Status</FormLabel>
-              <CustomSelectInput options={networkStatus} />
-            </Box>
-            <Box>
-              <FormLabel>Network Address</FormLabel>
-              <CustomInput type="address" placeholder="link" />
-            </Box>
-            <Box>
-              <FormLabel>Description</FormLabel>
-              <CustomTextArea placeholder="Description" />
+              <PasswordField />
             </Box>
             <ButtonGroup spacing="10">
               <Button colorScheme="green" flex="1">
@@ -80,6 +69,6 @@ const NetworkDetail = (props) => {
   );
 };
 
-NetworkDetail.propTypes = {};
+Profile.propTypes = {};
 
-export default NetworkDetail;
+export default Profile;

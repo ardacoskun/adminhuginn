@@ -64,3 +64,16 @@ export const networkStatus = [
     name: "Soon",
   },
 ];
+
+export const profileStatus = [
+  {
+    id: 1,
+    value: 0,
+    name: "Admin",
+  },
+  {
+    id: 2,
+    value: 1,
+    name: "User",
+  },
+];

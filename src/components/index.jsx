@@ -12,6 +12,7 @@ import CustomInput from "./ui/CustomInput";
 import CustomNumberInput from "./ui/CustomNumberInput";
 import CustomSelectInput from "./ui/CustomSelectInput";
 import CustomTextArea from "./ui/CustomTextArea";
+import Profile from "./Profile";
 
 export {
   PasswordField,
@@ -28,4 +29,5 @@ export {
   CustomNumberInput,
   CustomSelectInput,
   CustomTextArea,
+  Profile,
 };
