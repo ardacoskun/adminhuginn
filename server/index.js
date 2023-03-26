@@ -3,10 +3,12 @@ const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const authRoute = require("./routes/auth");
+const userRoute = require("./routes/user");
 dotenv.config();
 
 app.use(express.json());
 app.use("/api/auth/", authRoute);
+app.use("/api/user/", userRoute);
 
 const PORT = process.env.PORT || 5000;
 
