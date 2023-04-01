@@ -29,6 +29,7 @@ const register = async (req, res) => {
       {
         userId: newUser._id,
         email,
+        isAdmin,
       },
       process.env.JWT_KEY,
       {
@@ -61,6 +62,7 @@ const login = async (req, res) => {
         {
           userId: user._id,
           email,
+          isAdmin: user.isAdmin,
         },
         process.env.JWT_KEY,
         {

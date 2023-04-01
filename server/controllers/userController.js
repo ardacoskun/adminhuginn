@@ -19,4 +19,23 @@ const updateUser = async (req, res) => {
   }
 };
 
-module.exports = { updateUser };
+const deleteUser = async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.status(200).json("User has been deleted...");
+  } catch (error) {
+    res.status(500).send("Something went wrong!");
+  }
+};
+
+const getUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const { password, ...others } = user._doc;
+    res.status(200).json(others);
+  } catch (error) {
+    res.status(500).send("Something went wrong!");
+  }
+};
+
+module.exports = { updateUser, deleteUser, getUser };
