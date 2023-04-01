@@ -3,7 +3,7 @@ const Network = require("../models/Network");
 //Get All Networks
 const getAllNetworks = async (req, res) => {
   try {
-    networks = await Network.find();
+    const networks = await Network.find();
     res.status(200).json(networks);
   } catch (error) {
     res.status(500).json("Something went wrong!");
