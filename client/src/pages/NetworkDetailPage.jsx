@@ -12,6 +12,7 @@ const NetworkDetailPage = () => {
   const toast = useToast();
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [updateLoading, setUpdateLoading] = useState(false);
   const { config } = checkToken();
 
   useEffect(() => {
@@ -38,7 +39,31 @@ const NetworkDetailPage = () => {
     getNetwork();
   }, [networkId]);
 
-  const onSubmit = () => {};
+  const onSubmit = async (values) => {
+    try {
+      setUpdateLoading(true);
+      const { status, data } = await axios.put(
+        `${import.meta.env.VITE_SERVER_API_URL}/network/${networkId}`,
+        values,
+        config
+      );
+      if (status === 200 && data) {
+        setUpdateLoading(false);
+        toast({
+          status: "success",
+          description: "Network updated successfully...",
+        });
+        return;
+      }
+    } catch (error) {
+      setUpdateLoading(false);
+      toast({
+        title: "Error",
+        status: "error",
+        description: error.response.data,
+      });
+    }
+  };
 
   const {
     networkName,
@@ -100,6 +125,7 @@ const NetworkDetailPage = () => {
           onSubmit={handleSubmit}
           setFieldValue={setFieldValue}
           deleteNetwork={deleteNetwork}
+          loading={updateLoading}
           isDetail
         />
       )}

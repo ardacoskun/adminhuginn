@@ -24,6 +24,7 @@ const NetworkCreate = ({
   setFieldValue,
   isDetail,
   deleteNetwork,
+  loading,
 }) => {
   const isDesktop = useBreakpointValue({
     base: false,
@@ -120,7 +121,12 @@ const NetworkCreate = ({
               width={isDetail ? "100%" : "50%"}
               mx="auto"
             >
-              <Button colorScheme="green" flex="1" onClick={onSubmit}>
+              <Button
+                colorScheme="green"
+                flex="1"
+                onClick={onSubmit}
+                isLoading={loading}
+              >
                 Save
               </Button>
               {isDetail && (
@@ -155,10 +161,12 @@ NetworkCreate.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   deleteNetwork: PropTypes.func,
   isDetail: PropTypes.bool,
+  loading: PropTypes.bool,
 };
 
 NetworkCreate.defaultProps = {
   isDetail: false,
+  loading: false,
   deleteNetwork: () => {},
 };
 
