@@ -10,7 +10,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
-        <Route path="/add" element={<NetworkDetailPage />} />
+        <Route path="/create" element={<NetworkDetailPage />} />
         <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </>

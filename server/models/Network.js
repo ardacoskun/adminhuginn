@@ -8,6 +8,7 @@ const NetworkSchema = new mongoose.Schema(
     status: { type: Number, required: true },
     description: { type: String },
     imageUrl: { type: String },
+    stakeUrl: { type: String },
     userId: { type: String, required: true },
   },
   { timestamps: true }

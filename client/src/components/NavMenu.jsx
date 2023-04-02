@@ -25,8 +25,8 @@ const navItems = [
   },
   {
     id: 2,
-    title: "Add Network",
-    link: "/add",
+    title: "Create Network",
+    link: "/create",
   },
 ];
 

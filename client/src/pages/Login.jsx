@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthForm } from "../components";
 import { loginSchema } from "../../schema/loginSchema";
+import { addTokenLocalStorage } from "../../helpers/authToken";
 
 const Login = () => {
   const toast = useToast();
@@ -16,7 +17,8 @@ const Login = () => {
         `${import.meta.env.VITE_SERVER_API_URL}/auth/login`,
         others
       );
-      if (res.data.userDetails) {
+      if (res.status === 200 && res.data.userDetails) {
+        addTokenLocalStorage(res.data.userDetails);
         toast({
           status: "success",
           description: `Welcome again ${res.data.userDetails?.username}`,
@@ -33,7 +35,7 @@ const Login = () => {
     }
   };
 
-  const { values, handleChange, handleSubmit, errors, touched } = useFormik({
+  const { values, handleChange, handleSubmit, errors } = useFormik({
     initialValues: {
       email: "",
       password: "",
