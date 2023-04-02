@@ -49,7 +49,7 @@ const getNetwork = async (req, res) => {
 //Delete Network
 const deleteNetwork = async (req, res) => {
   try {
-    const network = await Network.findByIdAndDelete(req.params.id);
+    await Network.findByIdAndDelete(req.params.id);
     res.status(200).json("Network has been deleted...");
   } catch (error) {
     res.status(500).json("Something went wrong!");

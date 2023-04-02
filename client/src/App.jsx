@@ -1,4 +1,11 @@
-import { Register, Login, Home, NetworkCreatePage, ProfilePage } from "./pages";
+import {
+  Register,
+  Login,
+  Home,
+  NetworkCreatePage,
+  NetworkDetailPage,
+  ProfilePage,
+} from "./pages";
 import { Route, Routes } from "react-router-dom";
 import { Navbar } from "./components";
 
@@ -11,6 +18,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<NetworkCreatePage />} />
+        <Route path="/:networkId" element={<NetworkDetailPage />} />
         <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </>

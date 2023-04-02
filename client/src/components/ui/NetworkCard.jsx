@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {
   Card,
   CardBody,
@@ -15,8 +14,9 @@ import {
   Flex,
   Avatar,
   Box,
-  Link,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 const NetworkCard = ({ ...item }) => {
   const {
@@ -28,7 +28,9 @@ const NetworkCard = ({ ...item }) => {
     userId,
     stakeUrl,
     status,
+    _id,
   } = item;
+
   return (
     <Card maxW="sm">
       <CardBody>
@@ -73,7 +75,7 @@ const NetworkCard = ({ ...item }) => {
       <Divider />
       <CardFooter>
         <ButtonGroup spacing="10" width="100%">
-          <Link
+          <ChakraLink
             href={status === 0 && stakeUrl}
             isExternal
             flex="1"
@@ -89,10 +91,12 @@ const NetworkCard = ({ ...item }) => {
             >
               {status === 0 ? "Stake Now" : "Soon"}
             </Button>
+          </ChakraLink>
+          <Link to={`/${_id}`} className="link" style={{ flex: 1 }}>
+            <Button as="a" size="md" colorScheme="green" width="100%">
+              Edit
+            </Button>
           </Link>
-          <Button size="md" colorScheme="green" flex="1">
-            Edit
-          </Button>
         </ButtonGroup>
       </CardFooter>
     </Card>

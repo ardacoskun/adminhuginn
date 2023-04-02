@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {
   NumberDecrementStepper,
   NumberIncrementStepper,
@@ -12,7 +11,7 @@ const CustomNumberInput = (props) => {
   const { name, value, onChange } = props;
   return (
     <NumberInput
-      defaultValue={value}
+      value={value}
       precision={1}
       step={0.5}
       min={0}

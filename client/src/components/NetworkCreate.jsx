@@ -16,7 +16,13 @@ import CustomSelectInput from "./ui/CustomSelectInput";
 import CustomTextArea from "./ui/CustomTextArea";
 import { enviromentData, networkStatus } from "../../data/data";
 
-const NetworkCreate = ({ handleChange, values, onSubmit, setFieldValue }) => {
+const NetworkCreate = ({
+  handleChange,
+  values,
+  onSubmit,
+  setFieldValue,
+  isDetail,
+}) => {
   const isDesktop = useBreakpointValue({
     base: false,
     lg: true,
@@ -104,10 +110,19 @@ const NetworkCreate = ({ handleChange, values, onSubmit, setFieldValue }) => {
                 value={values?.description}
               />
             </FormControl>
-            <ButtonGroup spacing="10" width="50%" mx="auto">
+            <ButtonGroup
+              spacing="10"
+              width={isDetail ? "100%" : "50%"}
+              mx="auto"
+            >
               <Button colorScheme="green" flex="1" onClick={onSubmit}>
                 Save
               </Button>
+              {isDetail && (
+                <Button colorScheme="red" flex="1" onClick={() => {}}>
+                  Delete
+                </Button>
+              )}
             </ButtonGroup>
           </Box>
         </div>
@@ -119,6 +134,11 @@ const NetworkCreate = ({ handleChange, values, onSubmit, setFieldValue }) => {
 NetworkCreate.propTypes = {
   handleChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  isDetail: PropTypes.bool,
+};
+
+NetworkCreate.defaultProps = {
+  isDetail: false,
 };
 
 export default NetworkCreate;
