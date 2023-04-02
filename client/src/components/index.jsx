@@ -12,6 +12,7 @@ import CustomInput from "./ui/CustomInput";
 import CustomNumberInput from "./ui/CustomNumberInput";
 import CustomSelectInput from "./ui/CustomSelectInput";
 import CustomTextArea from "./ui/CustomTextArea";
+import CustomModal from "./ui/CustomModal";
 import Profile from "./Profile";
 
 export {
@@ -19,6 +20,7 @@ export {
   Logo,
   AuthForm,
   CustomButton,
+  CustomModal,
   Navbar,
   DrawerExample,
   NavMenu,

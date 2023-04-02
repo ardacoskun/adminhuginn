@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Flex, Spinner, useToast } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { NetworkCreate } from "../components";
@@ -8,13 +8,14 @@ import { checkToken } from "../../helpers/authToken";
 
 const NetworkDetailPage = () => {
   const { networkId } = useParams();
+  const navigate = useNavigate();
   const toast = useToast();
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
+  const { config } = checkToken();
 
   useEffect(() => {
     const getNetwork = async () => {
-      const { config } = checkToken();
       try {
         setLoading(true);
         const { status, data } = await axios.get(
@@ -64,6 +65,28 @@ const NetworkDetailPage = () => {
     onSubmit,
   });
 
+  const deleteNetwork = async () => {
+    try {
+      const { status, data } = await axios.delete(
+        `${import.meta.env.VITE_SERVER_API_URL}/network/${networkId}`,
+        config
+      );
+      if (status === 200) {
+        navigate("/");
+        toast({
+          status: "success",
+          description: data,
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        status: "error",
+        description: error.response.data,
+      });
+    }
+  };
+
   return (
     <>
       {loading ? (
@@ -76,6 +99,7 @@ const NetworkDetailPage = () => {
           values={values}
           onSubmit={handleSubmit}
           setFieldValue={setFieldValue}
+          deleteNetwork={deleteNetwork}
           isDetail
         />
       )}

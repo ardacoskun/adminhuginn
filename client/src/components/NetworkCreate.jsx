@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import {
   Container,
@@ -11,6 +11,7 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import CustomInput from "./ui/CustomInput";
+import CustomModal from "./ui/CustomModal";
 import CustomNumberInput from "./ui/CustomNumberInput";
 import CustomSelectInput from "./ui/CustomSelectInput";
 import CustomTextArea from "./ui/CustomTextArea";
@@ -22,11 +23,15 @@ const NetworkCreate = ({
   onSubmit,
   setFieldValue,
   isDetail,
+  deleteNetwork,
 }) => {
   const isDesktop = useBreakpointValue({
     base: false,
     lg: true,
   });
+
+  const [openModal, setOpenModal] = useState(false);
+
   return (
     <Container maxW="8xl" pb={isDesktop ? "" : "20px"}>
       <>
@@ -119,13 +124,27 @@ const NetworkCreate = ({
                 Save
               </Button>
               {isDetail && (
-                <Button colorScheme="red" flex="1" onClick={() => {}}>
+                <Button
+                  colorScheme="red"
+                  flex="1"
+                  onClick={() => setOpenModal(true)}
+                >
                   Delete
                 </Button>
               )}
             </ButtonGroup>
           </Box>
         </div>
+        {isDetail ? (
+          <CustomModal
+            title="Delete Network"
+            description="Are you sure want to delete this network?"
+            btnText="Delete"
+            onClick={deleteNetwork}
+            isOpen={openModal}
+            onClose={() => setOpenModal(false)}
+          />
+        ) : null}
       </>
     </Container>
   );
@@ -134,11 +153,13 @@ const NetworkCreate = ({
 NetworkCreate.propTypes = {
   handleChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  deleteNetwork: PropTypes.func,
   isDetail: PropTypes.bool,
 };
 
 NetworkCreate.defaultProps = {
   isDetail: false,
+  deleteNetwork: () => {},
 };
 
 export default NetworkCreate;
