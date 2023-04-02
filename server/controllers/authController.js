@@ -54,6 +54,11 @@ const login = async (req, res) => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email: email.toLowerCase() });
+
+    if (!user) {
+      return res.status(404).send("No such user was found.");
+    }
+
     const comparePassword = await bcrypt.compare(password, user.password);
 
     if (user && comparePassword) {
