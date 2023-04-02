@@ -12,9 +12,9 @@ import {
 } from "@chakra-ui/react";
 import { FaUser } from "react-icons/fa";
 import { GoSignOut } from "react-icons/go";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Link as ChakraLink } from "@chakra-ui/react";
-
+import { deleteTokenLocalStorage } from "../../helpers/authToken";
 import { socialMedia } from "../../data/data";
 
 const navItems = [
@@ -30,22 +30,14 @@ const navItems = [
   },
 ];
 
-const profileItems = [
-  {
-    id: 1,
-    icon: <FaUser />,
-    title: "Profile",
-    link: "/profile",
-  },
-  {
-    id: 2,
-    icon: <GoSignOut />,
-    title: "Log Out",
-    link: "/",
-  },
-];
-
 const NavMenu = ({ isOpen }) => {
+  const navigate = useNavigate();
+
+  const logout = () => {
+    deleteTokenLocalStorage();
+    navigate("/login");
+  };
+
   return (
     <div
       style={{
@@ -110,23 +102,33 @@ const NavMenu = ({ isOpen }) => {
             </MenuGroup>
             <MenuDivider />
             <MenuGroup title="Profile">
-              {profileItems.map((item) => (
-                <Link key={item.id} to={item.link}>
-                  <MenuItem>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        gap: "6px",
-                      }}
-                    >
-                      {item.icon}
-                      {item.title}
-                    </div>
-                  </MenuItem>
-                </Link>
-              ))}
+              <Link to={"/profile"}>
+                <MenuItem>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: "6px",
+                    }}
+                  >
+                    <FaUser /> Profile
+                  </div>
+                </MenuItem>
+              </Link>
+              <MenuItem onClick={logout}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: "6px",
+                  }}
+                >
+                  <GoSignOut />
+                  Log Out
+                </div>
+              </MenuItem>
             </MenuGroup>
           </MenuList>
         </Menu>
