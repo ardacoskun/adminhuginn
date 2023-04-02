@@ -10,7 +10,7 @@ const register = async (req, res) => {
     const userExists = await User.findOne({ email: email.toLowerCase() });
 
     if (userExists) {
-      return res.status(409).send("Email already taken.");
+      return res.status(409).json("Email already taken.");
     }
 
     //Encrypt Password

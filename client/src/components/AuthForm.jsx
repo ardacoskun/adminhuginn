@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import {
   Box,
   Button,
-  Checkbox,
   Container,
   FormControl,
   FormLabel,
@@ -16,7 +15,7 @@ import {
 import { PasswordField, Logo, CustomButton } from "../components";
 import { Link } from "react-router-dom";
 
-const AuthForm = ({ isLogin }) => {
+const AuthForm = ({ isLogin, handleChange, values, onSubmit }) => {
   return (
     <Container
       maxW="lg"
@@ -94,24 +93,43 @@ const AuthForm = ({ isLogin }) => {
               {!isLogin ? (
                 <FormControl>
                   <FormLabel htmlFor="email">Username</FormLabel>
-                  <Input id="username" type="text" />
+                  <Input
+                    id="username"
+                    type="text"
+                    name="username"
+                    onChange={handleChange}
+                    value={values?.username}
+                  />
                 </FormControl>
               ) : null}
               <FormControl>
                 <FormLabel htmlFor="email">Email</FormLabel>
-                <Input id="email" type="email" />
+                <Input
+                  id="email"
+                  type="email"
+                  name="email"
+                  onChange={handleChange}
+                  value={values?.email}
+                />
               </FormControl>
-              <PasswordField />
+              <PasswordField
+                name="password"
+                onChange={handleChange}
+                value={values?.password}
+              />
             </Stack>
             <HStack justify="space-between">
-              <Checkbox defaultChecked>Remember me</Checkbox>
+              {/* <Checkbox defaultChecked>Remember me</Checkbox> */}
               {isLogin ? (
                 <Button variant="link" colorScheme="blue" size="sm">
                   Forgot password?
                 </Button>
               ) : null}
             </HStack>
-            <CustomButton text={isLogin ? "Login" : "Register"} />
+            <CustomButton
+              text={isLogin ? "Login" : "Register"}
+              onClick={onSubmit}
+            />
           </Stack>
         </Box>
       </Stack>
@@ -121,6 +139,8 @@ const AuthForm = ({ isLogin }) => {
 
 AuthForm.prototypes = {
   isLogin: PropTypes.bool,
+  handleChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 AuthForm.defaultProps = {

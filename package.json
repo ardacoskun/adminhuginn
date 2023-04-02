@@ -1,0 +1,26 @@
+{
+  "name": "adminhuginn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "cd client && yarn dev",
+    "server": "cd server && yarn start",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ardacoskun/adminhuginn.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ardacoskun/adminhuginn/issues"
+  },
+  "homepage": "https://github.com/ardacoskun/adminhuginn#readme",
+  "dependencies": {
+    "concurrently": "^8.0.1"
+  }
+}

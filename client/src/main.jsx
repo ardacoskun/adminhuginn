@@ -7,7 +7,15 @@ import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider
+      toastOptions={{
+        defaultOptions: {
+          position: "top-right",
+          duration: 3000,
+          isClosable: true,
+        },
+      }}
+    >
       <BrowserRouter>
         <App />
       </BrowserRouter>
