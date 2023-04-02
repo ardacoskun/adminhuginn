@@ -1,5 +1,6 @@
 import {
   FormControl,
+  FormErrorMessage,
   FormLabel,
   IconButton,
   Input,
@@ -12,6 +13,7 @@ import { forwardRef, useRef } from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 
 export const PasswordField = forwardRef((props, ref) => {
+  const { error } = props;
   const { isOpen, onToggle } = useDisclosure();
   const inputRef = useRef(null);
   const mergeRef = useMergeRefs(inputRef, ref);
@@ -24,7 +26,7 @@ export const PasswordField = forwardRef((props, ref) => {
     }
   };
   return (
-    <FormControl>
+    <FormControl isInvalid={error}>
       <FormLabel htmlFor="password">Password</FormLabel>
       <InputGroup>
         <InputRightElement>
@@ -45,6 +47,7 @@ export const PasswordField = forwardRef((props, ref) => {
           {...props}
         />
       </InputGroup>
+      {error && <FormErrorMessage>{error}</FormErrorMessage>}{" "}
     </FormControl>
   );
 });

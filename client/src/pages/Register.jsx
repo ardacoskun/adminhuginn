@@ -32,7 +32,7 @@ const Register = () => {
     }
   };
 
-  const { values, handleChange, handleSubmit, errors, touched } = useFormik({
+  const { values, handleChange, handleSubmit, errors } = useFormik({
     initialValues: {
       username: "",
       email: "",
@@ -48,6 +48,7 @@ const Register = () => {
       handleChange={handleChange}
       values={values}
       onSubmit={handleSubmit}
+      errors={errors}
     />
   );
 };

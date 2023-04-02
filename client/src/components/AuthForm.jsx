@@ -5,6 +5,7 @@ import {
   Button,
   Container,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Heading,
   HStack,
@@ -15,7 +16,7 @@ import {
 import { PasswordField, Logo, CustomButton } from "../components";
 import { Link } from "react-router-dom";
 
-const AuthForm = ({ isLogin, handleChange, values, onSubmit }) => {
+const AuthForm = ({ isLogin, handleChange, values, onSubmit, errors }) => {
   return (
     <Container
       maxW="lg"
@@ -91,7 +92,7 @@ const AuthForm = ({ isLogin, handleChange, values, onSubmit }) => {
             </Stack>
             <Stack spacing="5">
               {!isLogin ? (
-                <FormControl>
+                <FormControl isInvalid={errors.username}>
                   <FormLabel htmlFor="email">Username</FormLabel>
                   <Input
                     id="username"
@@ -100,9 +101,12 @@ const AuthForm = ({ isLogin, handleChange, values, onSubmit }) => {
                     onChange={handleChange}
                     value={values?.username}
                   />
+                  {errors.username && (
+                    <FormErrorMessage>{errors.username}</FormErrorMessage>
+                  )}
                 </FormControl>
               ) : null}
-              <FormControl>
+              <FormControl isInvalid={errors.email}>
                 <FormLabel htmlFor="email">Email</FormLabel>
                 <Input
                   id="email"
@@ -111,11 +115,15 @@ const AuthForm = ({ isLogin, handleChange, values, onSubmit }) => {
                   onChange={handleChange}
                   value={values?.email}
                 />
+                {errors.email && (
+                  <FormErrorMessage>{errors.email}</FormErrorMessage>
+                )}
               </FormControl>
               <PasswordField
                 name="password"
                 onChange={handleChange}
                 value={values?.password}
+                error={errors.password}
               />
             </Stack>
             <HStack justify="space-between">

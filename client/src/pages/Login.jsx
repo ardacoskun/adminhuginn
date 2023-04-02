@@ -48,6 +48,7 @@ const Login = () => {
       handleChange={handleChange}
       values={values}
       onSubmit={handleSubmit}
+      errors={errors}
     />
   );
 };
