@@ -8,6 +8,7 @@ import NavMenu from "./NavMenu";
 import Networks from "./Networks";
 import NetworkCard from "./ui/NetworkCard";
 import NetworkDetail from "./NetworkDetail";
+import NetworkCreate from "./NetworkCreate";
 import CustomInput from "./ui/CustomInput";
 import CustomNumberInput from "./ui/CustomNumberInput";
 import CustomSelectInput from "./ui/CustomSelectInput";
@@ -25,6 +26,7 @@ export {
   Networks,
   NetworkCard,
   NetworkDetail,
+  NetworkCreate,
   CustomInput,
   CustomNumberInput,
   CustomSelectInput,

@@ -9,8 +9,15 @@ import {
 } from "@chakra-ui/react";
 
 const CustomNumberInput = (props) => {
+  const { name, value, onChange } = props;
   return (
-    <NumberInput defaultValue={0} precision={1} step={0.5} min={0}>
+    <NumberInput
+      defaultValue={value}
+      precision={1}
+      step={0.5}
+      min={0}
+      onChange={(val) => onChange(name, Number(val))}
+    >
       <NumberInputField />
       <NumberInputStepper>
         <NumberIncrementStepper />

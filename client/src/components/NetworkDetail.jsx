@@ -33,11 +33,13 @@ const NetworkDetail = (props) => {
         >
           <Box>
             <Image
-              boxSize={isDesktop ? "400px" : "250px"}
-              src="https://bit.ly/dan-abramov"
+              boxSize={isDesktop ? "350px" : "250px"}
+              src="./images/emptyImage.png"
               alt="Dan Abramov"
               borderRadius="10px"
               margin={!isDesktop ? "auto" : ""}
+              border="1px solid #000"
+              p="20px"
             />
           </Box>
           <Box flex="1" display="flex" flexDirection="column" gap="15px">

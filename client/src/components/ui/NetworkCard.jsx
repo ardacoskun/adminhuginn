@@ -44,19 +44,19 @@ const NetworkCard = ({ ...item }) => {
             </Flex>
             <Badge
               fontSize="0.8em"
-              colorScheme={enviroment === "Mainnet" ? "green" : "red"}
+              colorScheme={enviroment === 1 ? "red" : "green"}
               style={{
                 borderRadius: "30px",
                 padding: "5px 10px",
               }}
             >
-              {enviroment}
+              {enviroment === 1 ? "Testnet" : "Mainnet"}
             </Badge>
           </Flex>
 
           <Text>{description}</Text>
           <Text color="blue.600" fontSize="2xl">
-            {`APR: ${apr && "%"}${apr ? apr : null}`}
+            {`APR: ${apr ? "%" : ""}${apr ? apr : ""}`}
           </Text>
         </Stack>
         <Flex spacing="4" mt="15px">
@@ -74,7 +74,7 @@ const NetworkCard = ({ ...item }) => {
       <CardFooter>
         <ButtonGroup spacing="10" width="100%">
           <Link
-            href={status === 1 && stakeUrl}
+            href={status === 0 && stakeUrl}
             isExternal
             flex="1"
             className="link"
@@ -85,9 +85,9 @@ const NetworkCard = ({ ...item }) => {
               colorScheme="blue"
               size="md"
               width="100%"
-              isDisabled={status === 0}
+              isDisabled={status === 1}
             >
-              {status === 1 ? "Stake Now" : "Soon"}
+              {status === 0 ? "Stake Now" : "Soon"}
             </Button>
           </Link>
           <Button size="md" colorScheme="green" flex="1">
