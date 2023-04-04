@@ -30,7 +30,7 @@ const navItems = [
   },
 ];
 
-const NavMenu = ({ isOpen }) => {
+const NavMenu = ({ isOpen, user }) => {
   const navigate = useNavigate();
 
   const logout = () => {
@@ -78,7 +78,7 @@ const NavMenu = ({ isOpen }) => {
                 gap: "6px",
               }}
             >
-              <FaUser /> Profile
+              <FaUser /> {user?.username}
             </div>
           </MenuButton>
           <MenuList>

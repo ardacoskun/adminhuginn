@@ -14,7 +14,7 @@ import Logo from "./ui/Logo";
 import DrawerExample from "./ui/DrawerExample";
 import NavMenu from "./NavMenu";
 
-const Navbar = () => {
+const Navbar = ({ user }) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   const btnRef = useRef();
@@ -44,7 +44,7 @@ const Navbar = () => {
               <Logo width="50px" height="50px" />
             </Link>
             {isDesktop ? (
-              <NavMenu isOpen={isOpen} />
+              <NavMenu isOpen={isOpen} user={user} />
             ) : (
               <IconButton
                 variant="ghost"
@@ -60,7 +60,7 @@ const Navbar = () => {
 
       {isOpen ? (
         <DrawerExample btnRef={btnRef} isOpen={isOpen} onClose={onClose}>
-          <NavMenu isOpen={isOpen} />
+          <NavMenu isOpen={isOpen} user={user} />
         </DrawerExample>
       ) : null}
     </Box>
