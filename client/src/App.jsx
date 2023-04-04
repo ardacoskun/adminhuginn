@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import {
   Register,
   Login,
@@ -7,25 +6,16 @@ import {
   NetworkDetailPage,
   ProfilePage,
 } from "./pages";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { Navbar } from "./components";
-import { getCurrentUser } from "../helpers/authToken";
+import { useAppContext } from "../context/appContext";
 
 function App() {
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const currentUser = getCurrentUser();
-    if (!currentUser) {
-      return navigate("/login");
-    }
-    setUser(getCurrentUser());
-  }, []);
+  const { user } = useAppContext();
 
   return (
     <>
-      {user && <Navbar user={user} />}
+      {user && <Navbar />}
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />

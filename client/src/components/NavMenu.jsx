@@ -16,6 +16,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import { deleteTokenLocalStorage } from "../../helpers/authToken";
 import { socialMedia } from "../../data/data";
+import { useAppContext } from "../../context/appContext";
 
 const navItems = [
   {
@@ -30,8 +31,9 @@ const navItems = [
   },
 ];
 
-const NavMenu = ({ isOpen, user }) => {
+const NavMenu = ({ isOpen }) => {
   const navigate = useNavigate();
+  const { user } = useAppContext();
 
   const logout = () => {
     deleteTokenLocalStorage();
