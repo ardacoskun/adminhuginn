@@ -4,6 +4,7 @@ import Home from "./Home";
 import NetworkDetailPage from "./NetworkDetailPage";
 import NetworkCreatePage from "./NetworkCreatePage";
 import ProfilePage from "./ProfilePage";
+import UsersPage from "./UsersPage";
 
 export {
   Register,
@@ -12,4 +13,5 @@ export {
   NetworkDetailPage,
   ProfilePage,
   NetworkCreatePage,
+  UsersPage,
 };

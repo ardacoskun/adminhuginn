@@ -7,8 +7,11 @@ const {
   updateUser,
   deleteUser,
   getUser,
+  getAllUsers,
 } = require("../controllers/userController");
 
+//GET ALL
+router.get("/", verifyTokenAndAdmin, getAllUsers);
 //UPDATE
 router.put("/:id", verifyTokenAndAuthorization, updateUser);
 //DELETE

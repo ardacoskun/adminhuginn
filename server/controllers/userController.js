@@ -1,6 +1,15 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({}, "-password");
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).send("Something went wrong!");
+  }
+};
+
 const updateUser = async (req, res) => {
   if (req.body.password) {
     req.body.password = await bcrypt.hash(req.body.password, 10);
@@ -38,4 +47,4 @@ const getUser = async (req, res) => {
   }
 };
 
-module.exports = { updateUser, deleteUser, getUser };
+module.exports = { updateUser, deleteUser, getUser, getAllUsers };

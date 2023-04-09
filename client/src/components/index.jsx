@@ -14,6 +14,7 @@ import CustomSelectInput from "./ui/CustomSelectInput";
 import CustomTextArea from "./ui/CustomTextArea";
 import CustomModal from "./ui/CustomModal";
 import Profile from "./Profile";
+import UserCard from "./ui/UserCard";
 
 export {
   PasswordField,
@@ -32,4 +33,5 @@ export {
   CustomSelectInput,
   CustomTextArea,
   Profile,
+  UserCard,
 };

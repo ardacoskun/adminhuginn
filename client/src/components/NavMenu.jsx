@@ -29,6 +29,11 @@ const navItems = [
     title: "Create Network",
     link: "/create",
   },
+  {
+    id: 3,
+    title: "Users",
+    link: "/users",
+  },
 ];
 
 const NavMenu = ({ isOpen }) => {

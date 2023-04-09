@@ -5,6 +5,7 @@ import {
   NetworkCreatePage,
   NetworkDetailPage,
   ProfilePage,
+  UsersPage,
 } from "./pages";
 import { Route, Routes } from "react-router-dom";
 import { Navbar } from "./components";
@@ -23,6 +24,7 @@ function App() {
         <Route path="/create" element={<NetworkCreatePage />} />
         <Route path="/:networkId" element={<NetworkDetailPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/users" element={<UsersPage />} />
       </Routes>
     </>
   );
