@@ -7,14 +7,13 @@ import { checkToken } from "../../helpers/authToken";
 const Home = () => {
   const toast = useToast();
   const [networks, setNetworks] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getNetworks = async () => {
       const { config } = checkToken();
 
       try {
-        setLoading(true);
         const res = await axios.get(
           `${import.meta.env.VITE_SERVER_API_URL}/network`,
           config
@@ -35,19 +34,25 @@ const Home = () => {
     getNetworks();
   }, []);
 
+  if (loading) {
+    return (
+      <Flex alignItems="center" justify="center">
+        <Spinner width="100px" height="100px" />
+      </Flex>
+    );
+  }
+
+  if (!loading && networks?.length === 0) {
+    return (
+      <Heading as="h2" size="xl" textAlign="center" mt="10%">
+        There are no networks yet.
+      </Heading>
+    );
+  }
+
   return (
     <>
-      {loading ? (
-        <Flex alignItems="center" justify="center">
-          <Spinner width="100px" height="100px" />
-        </Flex>
-      ) : networks?.length > 0 ? (
-        <Networks networks={networks} />
-      ) : (
-        <Heading as="h2" size="xl" textAlign="center" mt="10%">
-          There are no networks yet.
-        </Heading>
-      )}
+      <Networks networks={networks} />
     </>
   );
 };

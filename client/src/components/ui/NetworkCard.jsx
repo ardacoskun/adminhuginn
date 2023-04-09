@@ -34,15 +34,21 @@ const NetworkCard = ({ ...item }) => {
   return (
     <Card maxW="sm">
       <CardBody>
-        <Image
-          src={imageUrl}
-          alt={networkName}
-          borderRadius="lg"
+        <Box
           width="300px"
-          sx={{
-            objectFit: "cover",
-          }}
-        />
+          p="15px"
+          borderRadius="10px"
+          sx={{ minHeight: "300px" }}
+        >
+          <Image
+            src={imageUrl}
+            alt={networkName}
+            borderRadius="lg"
+            width="100%"
+            sx={{ objectFit: "cover" }}
+          />
+        </Box>
+        <Divider borderWidth="2px" />
         <Stack mt="6" spacing="3">
           <Flex spacing="4">
             <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
