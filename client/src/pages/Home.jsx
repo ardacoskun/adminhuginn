@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Flex, Spinner, useToast } from "@chakra-ui/react";
+import { Flex, Heading, Spinner, useToast } from "@chakra-ui/react";
 import { Networks } from "../components";
 import { checkToken } from "../../helpers/authToken";
 
@@ -41,8 +41,12 @@ const Home = () => {
         <Flex alignItems="center" justify="center">
           <Spinner width="100px" height="100px" />
         </Flex>
-      ) : (
+      ) : networks?.length > 0 ? (
         <Networks networks={networks} />
+      ) : (
+        <Heading as="h2" size="xl" textAlign="center" mt="10%">
+          There are no networks yet.
+        </Heading>
       )}
     </>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useFormik } from "formik";
 import { useToast } from "@chakra-ui/react";
@@ -9,16 +9,43 @@ import { useNavigate } from "react-router-dom";
 const NetworkCreatePage = () => {
   const toast = useToast();
   const navigate = useNavigate();
+  const [createLoading, setCreateLoading] = useState(false);
+  const [file, setFile] = useState();
+  const [imgUrl, setImgUrl] = useState();
+
+  const handleImageChange = (changeEvent) => {
+    const reader = new FileReader();
+
+    reader.onload = function (onLoadEvent) {
+      setImgUrl(onLoadEvent.target.result);
+      setFile(changeEvent.target.files[0]);
+    };
+
+    reader.readAsDataURL(changeEvent.target.files[0]);
+  };
 
   const onSubmit = async (values) => {
     const { config } = checkToken();
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "huginn-admin");
     try {
+      setCreateLoading(true);
+      const uploadImg = await axios.post(
+        `https://api.cloudinary.com/v1_1/${
+          import.meta.env.VITE_CLOUDINARY_NAME
+        }/image/upload`,
+        data
+      );
+      const { url } = uploadImg.data;
+
       const res = await axios.post(
         `${import.meta.env.VITE_SERVER_API_URL}/network/create`,
-        values,
+        { ...values, imageUrl: url },
         config
       );
       if (res.status === 200 && res.data) {
+        setCreateLoading(false);
         toast({
           status: "success",
           description: "Network created successfully...",
@@ -27,6 +54,7 @@ const NetworkCreatePage = () => {
         return;
       }
     } catch (error) {
+      setCreateLoading(false);
       toast({
         title: "Error",
         status: "error",
@@ -53,8 +81,11 @@ const NetworkCreatePage = () => {
     <NetworkCreate
       handleChange={handleChange}
       values={values}
+      loading={createLoading}
       onSubmit={handleSubmit}
       setFieldValue={setFieldValue}
+      onChangeImage={handleImageChange}
+      imageSrc={imgUrl}
     />
   );
 };

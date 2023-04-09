@@ -13,7 +13,7 @@ const CustomNumberInput = (props) => {
     <NumberInput
       value={value}
       precision={1}
-      step={0.5}
+      step={0.1}
       min={0}
       onChange={(val) => onChange(name, Number(val))}
     >

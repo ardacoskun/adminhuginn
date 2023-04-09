@@ -15,6 +15,20 @@ const NetworkDetailPage = () => {
   const [updateLoading, setUpdateLoading] = useState(false);
   const { config } = checkToken();
 
+  const [file, setFile] = useState();
+  const [imgUrl, setImgUrl] = useState();
+
+  const handleImageChange = (changeEvent) => {
+    const reader = new FileReader();
+
+    reader.onload = function (onLoadEvent) {
+      setImgUrl(onLoadEvent.target.result);
+      setFile(changeEvent.target.files[0]);
+    };
+
+    reader.readAsDataURL(changeEvent.target.files[0]);
+  };
+
   useEffect(() => {
     const getNetwork = async () => {
       try {
@@ -40,19 +54,40 @@ const NetworkDetailPage = () => {
   }, [networkId]);
 
   const onSubmit = async (values) => {
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "huginn-admin");
+
     try {
       setUpdateLoading(true);
-      const { status, data } = await axios.put(
+      let reqData;
+
+      if (file) {
+        const uploadImg = await axios.post(
+          `https://api.cloudinary.com/v1_1/${
+            import.meta.env.VITE_CLOUDINARY_NAME
+          }/image/upload`,
+          data
+        );
+        const { url } = uploadImg.data;
+
+        reqData = { ...values, imageUrl: url };
+      } else {
+        reqData = values;
+      }
+
+      const res = await axios.put(
         `${import.meta.env.VITE_SERVER_API_URL}/network/${networkId}`,
-        values,
+        reqData,
         config
       );
-      if (status === 200 && data) {
+      if (res.status === 200 && res.data) {
         setUpdateLoading(false);
         toast({
           status: "success",
           description: "Network updated successfully...",
         });
+        navigate("/");
         return;
       }
     } catch (error) {
@@ -120,13 +155,15 @@ const NetworkDetailPage = () => {
         </Flex>
       ) : (
         <NetworkCreate
+          isDetail
           handleChange={handleChange}
           values={values}
           onSubmit={handleSubmit}
           setFieldValue={setFieldValue}
           deleteNetwork={deleteNetwork}
           loading={updateLoading}
-          isDetail
+          onChangeImage={handleImageChange}
+          imageSrc={imgUrl}
         />
       )}
     </>

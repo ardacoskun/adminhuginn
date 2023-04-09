@@ -9,6 +9,7 @@ import {
   Button,
   ButtonGroup,
   useBreakpointValue,
+  Input,
 } from "@chakra-ui/react";
 import CustomInput from "./ui/CustomInput";
 import CustomModal from "./ui/CustomModal";
@@ -25,6 +26,8 @@ const NetworkCreate = ({
   isDetail,
   deleteNetwork,
   loading,
+  onChangeImage,
+  imageSrc,
 }) => {
   const isDesktop = useBreakpointValue({
     base: false,
@@ -32,6 +35,14 @@ const NetworkCreate = ({
   });
 
   const [openModal, setOpenModal] = useState(false);
+
+  const checkImageUrl = () => {
+    return imageSrc !== ""
+      ? imageSrc
+      : isDetail
+      ? values?.imageUrl
+      : "./images/emptyImage.png";
+  };
 
   return (
     <Container maxW="8xl" pb={isDesktop ? "" : "20px"}>
@@ -43,16 +54,37 @@ const NetworkCreate = ({
             gap: "20px",
           }}
         >
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "column",
+              gap: "10px",
+            }}
+          >
             <Image
               boxSize={isDesktop ? "350px" : "250px"}
-              src="./images/emptyImage.png"
+              src={checkImageUrl()}
               alt="Dan Abramov"
               borderRadius="10px"
               margin={!isDesktop ? "auto" : ""}
               border="1px solid #000"
               p="20px"
             />
+            <label>
+              <Input
+                placeholder="Select Image"
+                size="md"
+                type="file"
+                onChange={onChangeImage}
+                sx={{
+                  display: "none",
+                }}
+              />
+              <Button colorScheme="blue" sx={{ pointerEvents: "none" }}>
+                Select Image
+              </Button>
+            </label>
           </Box>
           <Box flex="1" display="flex" flexDirection="column" gap="15px">
             <FormControl>
@@ -104,6 +136,7 @@ const NetworkCreate = ({
                 name="stakeUrl"
                 id="stakeUrl"
                 value={values?.stakeUrl}
+                isDisabled={values?.status === 1}
               />
             </FormControl>
             <FormControl>
@@ -162,12 +195,16 @@ NetworkCreate.propTypes = {
   deleteNetwork: PropTypes.func,
   isDetail: PropTypes.bool,
   loading: PropTypes.bool,
+  onChangeImage: PropTypes.func,
+  imageSrc: PropTypes.string,
 };
 
 NetworkCreate.defaultProps = {
   isDetail: false,
   loading: false,
   deleteNetwork: () => {},
+  onChangeImage: () => {},
+  imageSrc: "",
 };
 
 export default NetworkCreate;
