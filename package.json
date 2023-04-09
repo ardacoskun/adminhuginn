@@ -1,26 +1,26 @@
 {
-  "name": "adminhuginn",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon server/index",
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "cd client && yarn dev",
     "server": "cd server && yarn start",
-    "dev": "concurrently \"npm run client\" \"npm run server\""
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ardacoskun/adminhuginn.git"
+    "dev": "concurrently \"yarn server\" \"yarn client\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ardacoskun/adminhuginn/issues"
-  },
-  "homepage": "https://github.com/ardacoskun/adminhuginn#readme",
   "dependencies": {
-    "concurrently": "^8.0.1"
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^8.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.3",
+    "nodemon": "^2.0.22"
   }
 }
