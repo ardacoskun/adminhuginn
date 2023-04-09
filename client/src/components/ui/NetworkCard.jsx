@@ -86,7 +86,7 @@ const NetworkCard = ({ ...item }) => {
       <CardFooter>
         <ButtonGroup spacing="10" width="100%">
           <ChakraLink
-            href={status === 0 && stakeUrl}
+            href={status === 0 && stakeUrl.toString()}
             isExternal
             flex="1"
             className="link"

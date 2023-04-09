@@ -19,6 +19,14 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    telegramLink: {
+      type: String,
+      default: "",
+    },
+    avatar: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true }
 );
