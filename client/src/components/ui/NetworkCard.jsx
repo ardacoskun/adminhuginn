@@ -73,7 +73,7 @@ const NetworkCard = ({ ...item }) => {
         </Stack>
         <Flex spacing="4" mt="15px">
           <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
-            <Avatar size="sm" name="user" src="https://bit.ly/sage-adebayo" />
+            <Avatar size="sm" name="user" src="./images/logo.jpeg" />
             <Box>
               <Text>
                 created by <strong>User1</strong>

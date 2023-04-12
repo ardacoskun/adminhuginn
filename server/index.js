@@ -3,13 +3,15 @@ const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
 const networkRoute = require("./routes/network");
 dotenv.config();
 
 app.use(express.json());
-app.use(cors());
+app.use(cookieParser());
+app.use(cors({ credentials: true, origin: true }));
 
 app.use("/api/auth/", authRoute);
 app.use("/api/user/", userRoute);

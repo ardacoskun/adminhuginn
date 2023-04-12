@@ -37,6 +37,13 @@ const register = async (req, res) => {
       }
     );
 
+    //Send cookie
+    const maxAge = 3 * 24 * 60 * 60 * 1000;
+    res.cookie("token", token, {
+      httpOnly: true,
+      maxAge,
+    });
+
     res.status(201).json({
       userDetails: {
         username: newUser.username,
@@ -76,6 +83,13 @@ const login = async (req, res) => {
         }
       );
 
+      //Send cookie
+      const maxAge = 3 * 24 * 60 * 60 * 1000;
+      res.cookie("token", token, {
+        httpOnly: true,
+        maxAge,
+      });
+
       return res.status(200).json({
         userDetails: {
           username: user.username,
@@ -87,6 +101,7 @@ const login = async (req, res) => {
     }
     return res.status(401).send("Wrong credentials.Please try again.");
   } catch (error) {
+    console.log("err", error);
     return res.status(500).send("Something went wrong!");
   }
 };

@@ -15,7 +15,8 @@ const Login = () => {
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_SERVER_API_URL}/auth/login`,
-        others
+        others,
+        { withCredentials: true }
       );
       if (res.status === 200 && res.data.userDetails) {
         addTokenLocalStorage(res.data.userDetails);
