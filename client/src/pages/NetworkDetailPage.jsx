@@ -39,6 +39,9 @@ const NetworkDetailPage = () => {
         }
       } catch (error) {
         setLoading(false);
+        if (error.response.status === 500) {
+          navigate("/create");
+        }
         toast({
           title: "Error",
           status: "error",
