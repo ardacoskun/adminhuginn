@@ -7,15 +7,13 @@ import {
   ProfilePage,
   UsersPage,
   ProtectedRoute,
+  SharedLayout,
 } from "./pages";
 import { Route, Routes } from "react-router-dom";
-import { Navbar } from "./components";
-import { useAppContext } from "../context/appContext";
 
 function App() {
   return (
     <>
-      {<Navbar />}
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
@@ -23,14 +21,16 @@ function App() {
           path="/"
           element={
             <ProtectedRoute>
-              <Home />
+              <SharedLayout />
             </ProtectedRoute>
           }
-        />
-        <Route path="/create" element={<NetworkCreatePage />} />
-        <Route path="/:networkId" element={<NetworkDetailPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/users" element={<UsersPage />} />
+        >
+          <Route path="/" element={<Home />} />
+          <Route path="create" element={<NetworkCreatePage />} />
+          <Route path=":networkId" element={<NetworkDetailPage />} />
+          <Route path="profile" element={<ProfilePage />} />
+          <Route path="users" element={<UsersPage />} />
+        </Route>
       </Routes>
     </>
   );

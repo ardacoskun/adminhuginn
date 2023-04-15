@@ -6,6 +6,7 @@ import NetworkCreatePage from "./NetworkCreatePage";
 import ProfilePage from "./ProfilePage";
 import UsersPage from "./UsersPage";
 import ProtectedRoute from "./ProtectedRoute";
+import SharedLayout from "./SharedLayout";
 
 export {
   Register,
@@ -16,4 +17,5 @@ export {
   NetworkCreatePage,
   UsersPage,
   ProtectedRoute,
+  SharedLayout,
 };
