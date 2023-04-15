@@ -14,7 +14,6 @@ import { FaUser } from "react-icons/fa";
 import { GoSignOut } from "react-icons/go";
 import { Link, useNavigate } from "react-router-dom";
 import { Link as ChakraLink } from "@chakra-ui/react";
-import { deleteTokenLocalStorage } from "../../helpers/authToken";
 import { socialMedia } from "../../data/data";
 import { useAppContext } from "../../context/appContext";
 
@@ -41,7 +40,6 @@ const NavMenu = ({ isOpen }) => {
   const { user } = useAppContext();
 
   const logout = () => {
-    deleteTokenLocalStorage();
     navigate("/login");
   };
 

@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthForm } from "../components";
 import { registerSchema } from "../../schema/registerSchema";
-import { addTokenLocalStorage } from "../../helpers/authToken";
 
 const Register = () => {
   const toast = useToast();
@@ -17,7 +16,6 @@ const Register = () => {
         values
       );
       if (res.status === 201 && res.data.userDetails) {
-        addTokenLocalStorage(res.data.userDetails);
         toast({
           status: "success",
           description: `Welcome ${res.data.userDetails?.username}`,

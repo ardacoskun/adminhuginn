@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
 
 const verifyToken = (req, res, next) => {
-  const authHeader = req.headers.token;
-  if (authHeader) {
-    const token = authHeader.split(" ")[1];
+  const token = req.cookies.token;
+
+  if (token) {
     jwt.verify(token, process.env.JWT_KEY, (error, user) => {
       if (error) res.status(403).json("Invalid Token!");
       req.user = user;

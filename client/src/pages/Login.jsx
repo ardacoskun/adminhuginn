@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthForm } from "../components";
 import { loginSchema } from "../../schema/loginSchema";
-import { addTokenLocalStorage } from "../../helpers/authToken";
 
 const Login = () => {
   const toast = useToast();
@@ -16,10 +15,16 @@ const Login = () => {
       const res = await axios.post(
         `${import.meta.env.VITE_SERVER_API_URL}/auth/login`,
         others,
-        { withCredentials: true }
+        {
+          headers: {
+            Accept: "applicaiton/json",
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+          credentials: "include",
+        }
       );
       if (res.status === 200 && res.data.userDetails) {
-        addTokenLocalStorage(res.data.userDetails);
         toast({
           status: "success",
           description: `Welcome again ${res.data.userDetails?.username}`,

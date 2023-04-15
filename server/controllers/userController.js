@@ -22,6 +22,23 @@ const updateUser = async (req, res) => {
       },
       { new: true }
     );
+
+    //Create JWT Token
+    const token = jwt.sign(
+      {
+        userId: newUser._id,
+        email,
+        isAdmin,
+      },
+      process.env.JWT_KEY,
+      {
+        expiresIn: "24h",
+      }
+    );
+
+    //Send cookie
+    attachCookie({ res, token });
+
     return res.status(200).json(updatedUser);
   } catch (error) {
     return res.status(500).send("Something went wrong!");

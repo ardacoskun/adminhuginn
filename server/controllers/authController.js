@@ -1,10 +1,11 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const attachCookie = require("../utils/attachCookie");
 
 const register = async (req, res) => {
   try {
-    const { username, email, password, isAdmin } = req.body;
+    const { username, email, password } = req.body;
 
     //Check if user exists
     const userExists = await User.findOne({ email: email.toLowerCase() });
@@ -21,7 +22,7 @@ const register = async (req, res) => {
       username,
       email: email.toLowerCase(),
       password: encryptedPassword,
-      isAdmin,
+      isAdmin: true,
     });
 
     //Create JWT Token
@@ -29,7 +30,7 @@ const register = async (req, res) => {
       {
         userId: newUser._id,
         email,
-        isAdmin,
+        isAdmin: true,
       },
       process.env.JWT_KEY,
       {
@@ -38,18 +39,13 @@ const register = async (req, res) => {
     );
 
     //Send cookie
-    const maxAge = 3 * 24 * 60 * 60 * 1000;
-    res.cookie("token", token, {
-      httpOnly: true,
-      maxAge,
-    });
+    attachCookie({ res, token });
 
     res.status(201).json({
       userDetails: {
         username: newUser.username,
         email: newUser.email,
-        token,
-        isAdmin,
+        isAdmin: true,
       },
     });
   } catch (error) {
@@ -84,26 +80,35 @@ const login = async (req, res) => {
       );
 
       //Send cookie
-      const maxAge = 3 * 24 * 60 * 60 * 1000;
-      res.cookie("token", token, {
-        httpOnly: true,
-        maxAge,
-      });
+      attachCookie({ res, token });
 
       return res.status(200).json({
         userDetails: {
           username: user.username,
           email: user.email,
-          token,
           isAdmin: user.isAdmin,
         },
       });
     }
     return res.status(401).send("Wrong credentials.Please try again.");
   } catch (error) {
-    console.log("err", error);
     return res.status(500).send("Something went wrong!");
   }
 };
 
-module.exports = { register, login };
+const logout = (req, res) => {
+  return res.clearCookie("token");
+};
+
+const getCurrentUser = async (req, res) => {
+  const user = await User.findOne({ _id: req.user.userId });
+  return res.status(200).json({
+    userDetails: {
+      username: user.username,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    },
+  });
+};
+
+module.exports = { register, login, logout, getCurrentUser };
