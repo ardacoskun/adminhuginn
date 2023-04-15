@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { UserCard } from "../components";
-import { Container, Spinner, useToast } from "@chakra-ui/react";
+import { Loading, UserCard } from "../components";
+import { Container, useToast } from "@chakra-ui/react";
 import { checkToken } from "../../helpers/authToken";
-import { Flex } from "@mantine/core";
 
 const UsersPage = () => {
   const [users, setUsers] = useState([]);
@@ -35,13 +34,7 @@ const UsersPage = () => {
     getUsers();
   }, []);
 
-  if (loading) {
-    return (
-      <Flex alignItems="center" justify="center">
-        <Spinner width="100px" height="100px" />
-      </Flex>
-    );
-  }
+  if (loading) return <Loading />;
 
   return (
     <Container

@@ -15,6 +15,7 @@ import CustomTextArea from "./ui/CustomTextArea";
 import CustomModal from "./ui/CustomModal";
 import Profile from "./Profile";
 import UserCard from "./ui/UserCard";
+import Loading from "./ui/Loading";
 
 export {
   PasswordField,
@@ -34,4 +35,5 @@ export {
   CustomTextArea,
   Profile,
   UserCard,
+  Loading,
 };

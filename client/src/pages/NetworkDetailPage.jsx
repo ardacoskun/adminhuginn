@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { Flex, Spinner, useToast } from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
 import { useFormik } from "formik";
-import { NetworkCreate } from "../components";
+import { Loading, NetworkCreate } from "../components";
 import { checkToken } from "../../helpers/authToken";
 
 const NetworkDetailPage = () => {
@@ -147,26 +147,20 @@ const NetworkDetailPage = () => {
     }
   };
 
+  if (loading) return <Loading />;
+
   return (
-    <>
-      {loading ? (
-        <Flex alignItems="center" justify="center">
-          <Spinner width="100px" height="100px" />
-        </Flex>
-      ) : (
-        <NetworkCreate
-          isDetail
-          handleChange={handleChange}
-          values={values}
-          onSubmit={handleSubmit}
-          setFieldValue={setFieldValue}
-          deleteNetwork={deleteNetwork}
-          loading={updateLoading}
-          onChangeImage={handleImageChange}
-          imageSrc={imgUrl}
-        />
-      )}
-    </>
+    <NetworkCreate
+      isDetail
+      handleChange={handleChange}
+      values={values}
+      onSubmit={handleSubmit}
+      setFieldValue={setFieldValue}
+      deleteNetwork={deleteNetwork}
+      loading={updateLoading}
+      onChangeImage={handleImageChange}
+      imageSrc={imgUrl}
+    />
   );
 };
 

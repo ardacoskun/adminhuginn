@@ -37,10 +37,11 @@ const navItems = [
 
 const NavMenu = ({ isOpen }) => {
   const navigate = useNavigate();
-  const { user } = useAppContext();
+  const { user, logout } = useAppContext();
 
-  const logout = () => {
-    navigate("/login");
+  const logoutUser = () => {
+    logout();
+    navigate("login");
   };
 
   return (
@@ -121,7 +122,7 @@ const NavMenu = ({ isOpen }) => {
                   </div>
                 </MenuItem>
               </Link>
-              <MenuItem onClick={logout}>
+              <MenuItem onClick={logoutUser}>
                 <div
                   style={{
                     display: "flex",

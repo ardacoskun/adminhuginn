@@ -5,6 +5,7 @@ import NetworkDetailPage from "./NetworkDetailPage";
 import NetworkCreatePage from "./NetworkCreatePage";
 import ProfilePage from "./ProfilePage";
 import UsersPage from "./UsersPage";
+import ProtectedRoute from "./ProtectedRoute";
 
 export {
   Register,
@@ -14,4 +15,5 @@ export {
   ProfilePage,
   NetworkCreatePage,
   UsersPage,
+  ProtectedRoute,
 };

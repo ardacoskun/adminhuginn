@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Flex, Heading, Spinner, useToast } from "@chakra-ui/react";
-import { Networks } from "../components";
+import { Heading, useToast } from "@chakra-ui/react";
+import { Loading, Networks } from "../components";
 import { checkToken } from "../../helpers/authToken";
 
 const Home = () => {
@@ -34,13 +34,7 @@ const Home = () => {
     getNetworks();
   }, []);
 
-  if (loading) {
-    return (
-      <Flex alignItems="center" justify="center">
-        <Spinner width="100px" height="100px" />
-      </Flex>
-    );
-  }
+  if (loading) return <Loading />;
 
   if (!loading && networks?.length === 0) {
     return (
