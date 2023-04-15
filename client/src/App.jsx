@@ -8,6 +8,7 @@ import {
   UsersPage,
   ProtectedRoute,
   SharedLayout,
+  Error,
 } from "./pages";
 import { Route, Routes } from "react-router-dom";
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="profile" element={<ProfilePage />} />
           <Route path="users" element={<UsersPage />} />
         </Route>
+        <Route path="*" element={<Error />} />
       </Routes>
     </>
   );

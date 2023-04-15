@@ -13,8 +13,8 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { PasswordField, Logo, CustomButton } from "../components";
 import { Link } from "react-router-dom";
+import { PasswordField, Logo, CustomButton } from "../components";
 
 const AuthForm = ({ isLogin, handleChange, values, onSubmit, errors }) => {
   return (

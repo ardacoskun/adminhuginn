@@ -65,7 +65,7 @@ const NetworkCreate = ({
             <Image
               boxSize={isDesktop ? "350px" : "250px"}
               src={checkImageUrl()}
-              alt="Dan Abramov"
+              alt={isDetail ? values.networkName : ""}
               borderRadius="10px"
               margin={!isDesktop ? "auto" : ""}
               border="1px solid #000"

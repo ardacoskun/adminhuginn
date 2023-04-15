@@ -7,6 +7,7 @@ import ProfilePage from "./ProfilePage";
 import UsersPage from "./UsersPage";
 import ProtectedRoute from "./ProtectedRoute";
 import SharedLayout from "./SharedLayout";
+import Error from "./Error";
 
 export {
   Register,
@@ -18,4 +19,5 @@ export {
   UsersPage,
   ProtectedRoute,
   SharedLayout,
+  Error,
 };
