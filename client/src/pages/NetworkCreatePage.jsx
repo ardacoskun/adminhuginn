@@ -3,8 +3,8 @@ import axios from "axios";
 import { useFormik } from "formik";
 import { useToast } from "@chakra-ui/react";
 import { NetworkCreate } from "../components";
-import { checkToken } from "../../helpers/authToken";
 import { useNavigate } from "react-router-dom";
+import { authFetch } from "../../helpers/authFetch";
 
 const NetworkCreatePage = () => {
   const toast = useToast();
@@ -25,7 +25,6 @@ const NetworkCreatePage = () => {
   };
 
   const onSubmit = async (values) => {
-    const { config } = checkToken();
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", "huginn-admin");
@@ -35,15 +34,17 @@ const NetworkCreatePage = () => {
         `https://api.cloudinary.com/v1_1/${
           import.meta.env.VITE_CLOUDINARY_NAME
         }/image/upload`,
-        data
+        data,
+        {
+          withCredentials: false,
+        }
       );
       const { url } = uploadImg.data;
 
-      const res = await axios.post(
-        `${import.meta.env.VITE_SERVER_API_URL}/network/create`,
-        { ...values, imageUrl: url },
-        config
-      );
+      const res = await authFetch.post("/network/create", {
+        ...values,
+        imageUrl: url,
+      });
       if (res.status === 200 && res.data) {
         setCreateLoading(false);
         toast({

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { Loading, NetworkCreate } from "../components";
-import { checkToken } from "../../helpers/authToken";
+import { authFetch } from "../../helpers/authFetch";
 
 const NetworkDetailPage = () => {
   const { networkId } = useParams();
@@ -13,7 +13,6 @@ const NetworkDetailPage = () => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
   const [updateLoading, setUpdateLoading] = useState(false);
-  const { config } = checkToken();
 
   const [file, setFile] = useState();
   const [imgUrl, setImgUrl] = useState();
@@ -33,10 +32,7 @@ const NetworkDetailPage = () => {
     const getNetwork = async () => {
       try {
         setLoading(true);
-        const { status, data } = await axios.get(
-          `${import.meta.env.VITE_SERVER_API_URL}/network/${networkId}`,
-          config
-        );
+        const { status, data } = await authFetch.get(`/network/${networkId}`);
         if (status === 200 && data) {
           setData(data);
           setLoading(false);
@@ -67,7 +63,10 @@ const NetworkDetailPage = () => {
           `https://api.cloudinary.com/v1_1/${
             import.meta.env.VITE_CLOUDINARY_NAME
           }/image/upload`,
-          data
+          data,
+          {
+            withCredentials: false,
+          }
         );
         const { url } = uploadImg.data;
 
@@ -76,11 +75,7 @@ const NetworkDetailPage = () => {
         reqData = values;
       }
 
-      const res = await axios.put(
-        `${import.meta.env.VITE_SERVER_API_URL}/network/${networkId}`,
-        reqData,
-        config
-      );
+      const res = await authFetch.put(`/network/${networkId}`, reqData);
       if (res.status === 200 && res.data) {
         setUpdateLoading(false);
         toast({
@@ -127,10 +122,7 @@ const NetworkDetailPage = () => {
 
   const deleteNetwork = async () => {
     try {
-      const { status, data } = await axios.delete(
-        `${import.meta.env.VITE_SERVER_API_URL}/network/${networkId}`,
-        config
-      );
+      const { status, data } = await authFetch.delete(`/network/${networkId}`);
       if (status === 200) {
         navigate("/");
         toast({

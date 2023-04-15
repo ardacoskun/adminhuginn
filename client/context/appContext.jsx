@@ -1,28 +1,20 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import axios from "axios";
-import { checkToken } from "../helpers/authToken";
+import { authFetch } from "../helpers/authFetch";
 
 const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userLoading, setUserLoading] = useState(true);
-  const { config } = checkToken();
 
   const logout = async () => {
-    await axios.get(
-      `${import.meta.env.VITE_SERVER_API_URL}/auth/logout`,
-      config
-    );
+    await authFetch.get("/auth/logout");
   };
 
   const getCurrentUser = async () => {
     setUserLoading(true);
     try {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_SERVER_API_URL}/auth/getCurrentUser`,
-        config
-      );
+      const { data } = await authFetch.get("/auth/getCurrentUser");
       setUser(data);
       setUserLoading(false);
     } catch (error) {

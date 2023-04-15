@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Heading, useToast } from "@chakra-ui/react";
 import { Loading, Networks } from "../components";
-import { checkToken } from "../../helpers/authToken";
+import { authFetch } from "../../helpers/authFetch";
 
 const Home = () => {
   const toast = useToast();
@@ -11,13 +10,8 @@ const Home = () => {
 
   useEffect(() => {
     const getNetworks = async () => {
-      const { config } = checkToken();
-
       try {
-        const res = await axios.get(
-          `${import.meta.env.VITE_SERVER_API_URL}/network`,
-          config
-        );
+        const res = await authFetch.get("/network");
         if (res.status === 200 && res?.data) {
           setNetworks(res.data);
           setLoading(false);

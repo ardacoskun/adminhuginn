@@ -1,9 +1,9 @@
 import { useFormik } from "formik";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { AuthForm } from "../components";
 import { registerSchema } from "../../schema/registerSchema";
+import { authFetch } from "../../helpers/authFetch";
 
 const Register = () => {
   const toast = useToast();
@@ -11,10 +11,7 @@ const Register = () => {
 
   const onSubmit = async (values) => {
     try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_SERVER_API_URL}/auth/register`,
-        values
-      );
+      const res = await authFetch.post("/auth/register", values);
       if (res.status === 201 && res.data.userDetails) {
         toast({
           status: "success",

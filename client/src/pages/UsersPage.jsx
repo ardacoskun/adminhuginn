@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Loading, UserCard } from "../components";
 import { Container, useToast } from "@chakra-ui/react";
-import { checkToken } from "../../helpers/authToken";
+import { authFetch } from "../../helpers/authFetch";
 
 const UsersPage = () => {
   const [users, setUsers] = useState([]);
@@ -11,13 +10,8 @@ const UsersPage = () => {
 
   useEffect(() => {
     const getUsers = async () => {
-      const { config } = checkToken();
-
       try {
-        const res = await axios.get(
-          `${import.meta.env.VITE_SERVER_API_URL}/user`,
-          config
-        );
+        const res = await authFetch.get("/user");
         if (res.status === 200 && res?.data) {
           setUsers(res.data);
           setLoading(false);
