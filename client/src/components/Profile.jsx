@@ -14,7 +14,7 @@ import CustomInput from "./ui/CustomInput";
 import CustomSelectInput from "./ui/CustomSelectInput";
 import { profileStatus } from "../../data/data";
 import { PasswordField } from "./ui/PasswordInput";
-const Profile = (props) => {
+const Profile = ({ handleChange, values, onSubmit, setFieldValue }) => {
   const isDesktop = useBreakpointValue({
     base: false,
     lg: true,
@@ -41,21 +41,42 @@ const Profile = (props) => {
           <Box flex="1" display="flex" flexDirection="column" gap="15px">
             <Box>
               <FormLabel>Username</FormLabel>
-              <CustomInput placeholder="Username" />
+              <CustomInput
+                placeholder="Username"
+                onChange={handleChange}
+                name="username"
+                id="username"
+                type="text"
+                value={values?.username}
+              />
             </Box>
             <Box>
               <FormLabel>Email</FormLabel>
-              <CustomInput placeholder="email" isReadOnly />
+              <CustomInput
+                placeholder="email"
+                isReadOnly
+                onChange={handleChange}
+                name="email"
+                id="email"
+                type="email"
+                value={values?.email}
+              />
             </Box>
             <Box>
               <FormLabel>Account Status</FormLabel>
-              <CustomSelectInput options={profileStatus} />
+              <CustomSelectInput
+                options={profileStatus}
+                onChange={setFieldValue}
+                name="isAdmin"
+                id="isAdmin"
+                value={values?.isAdmin}
+              />
             </Box>
             <Box>
               <PasswordField />
             </Box>
             <ButtonGroup spacing="10">
-              <Button colorScheme="green" flex="1">
+              <Button colorScheme="green" flex="1" onClick={onSubmit}>
                 Save
               </Button>
               <Button colorScheme="red" flex="1">

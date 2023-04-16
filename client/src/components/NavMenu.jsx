@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {
   Button,
-  HStack,
+  Box,
   Menu,
   MenuButton,
   MenuDivider,
@@ -75,7 +75,7 @@ const NavMenu = ({ isOpen }) => {
           </Link>
         ))}
       </div>
-      <HStack spacing="3">
+      <Box spacing="3">
         <Menu>
           <MenuButton as={Button} colorScheme="blue">
             <div
@@ -139,7 +139,7 @@ const NavMenu = ({ isOpen }) => {
             </MenuGroup>
           </MenuList>
         </Menu>
-      </HStack>
+      </Box>
     </div>
   );
 };
