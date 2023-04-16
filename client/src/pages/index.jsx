@@ -6,6 +6,7 @@ import NetworkCreatePage from "./NetworkCreatePage";
 import ProfilePage from "./ProfilePage";
 import UsersPage from "./UsersPage";
 import ProtectedRoute from "./ProtectedRoute";
+import PublicRoute from "./PublicRoute";
 import SharedLayout from "./SharedLayout";
 import Error from "./Error";
 
@@ -18,6 +19,7 @@ export {
   NetworkCreatePage,
   UsersPage,
   ProtectedRoute,
+  PublicRoute,
   SharedLayout,
   Error,
 };

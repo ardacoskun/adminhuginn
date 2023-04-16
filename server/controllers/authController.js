@@ -1,7 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
-const attachCookie = require("../utils/attachCookie");
 
 const register = async (req, res) => {
   try {
@@ -38,14 +37,12 @@ const register = async (req, res) => {
       }
     );
 
-    //Send cookie
-    attachCookie({ res, token });
-
     res.status(201).json({
       userDetails: {
         username: newUser.username,
         email: newUser.email,
         isAdmin: true,
+        token,
       },
     });
   } catch (error) {
@@ -79,14 +76,12 @@ const login = async (req, res) => {
         }
       );
 
-      //Send cookie
-      attachCookie({ res, token });
-
       return res.status(200).json({
         userDetails: {
           username: user.username,
           email: user.email,
           isAdmin: user.isAdmin,
+          token,
         },
       });
     }
@@ -98,18 +93,7 @@ const login = async (req, res) => {
 
 const logout = (req, res) => {
   res.clearCookie("token");
-  res.status(200).send("Logged out");
+  res.clearCookie("user");
+  return res.status(200).send("Logged out");
 };
-
-const getCurrentUser = async (req, res) => {
-  const user = await User.findOne({ _id: req.user.userId });
-  return res.status(200).json({
-    userDetails: {
-      username: user.username,
-      email: user.email,
-      isAdmin: user.isAdmin,
-    },
-  });
-};
-
-module.exports = { register, login, logout, getCurrentUser };
+module.exports = { register, login, logout };

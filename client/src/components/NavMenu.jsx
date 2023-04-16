@@ -15,7 +15,7 @@ import { GoSignOut } from "react-icons/go";
 import { Link, useNavigate } from "react-router-dom";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import { socialMedia } from "../../data/data";
-import { useAppContext } from "../../context/appContext";
+import { useCookies } from "react-cookie";
 
 const navItems = [
   {
@@ -36,12 +36,13 @@ const navItems = [
 ];
 
 const NavMenu = ({ isOpen }) => {
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const navigate = useNavigate();
-  const { user, logout } = useAppContext();
 
-  const logoutUser = () => {
-    logout();
-    navigate("login");
+  const logout = () => {
+    removeCookie("token", cookies.token);
+    removeCookie("user", cookies.user);
+    navigate("/login");
   };
 
   return (
@@ -84,7 +85,7 @@ const NavMenu = ({ isOpen }) => {
                 gap: "6px",
               }}
             >
-              <FaUser /> {user?.username}
+              <FaUser /> {cookies?.user?.username}
             </div>
           </MenuButton>
           <MenuList>
@@ -122,7 +123,7 @@ const NavMenu = ({ isOpen }) => {
                   </div>
                 </MenuItem>
               </Link>
-              <MenuItem onClick={logoutUser}>
+              <MenuItem onClick={logout}>
                 <div
                   style={{
                     display: "flex",

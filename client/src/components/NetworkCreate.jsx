@@ -67,7 +67,7 @@ const NetworkCreate = ({
               src={checkImageUrl()}
               alt={isDetail ? values.networkName : ""}
               borderRadius="10px"
-              margin={!isDesktop ? "auto" : ""}
+              m={!isDesktop ? "auto" : ""}
               border="1px solid #000"
               p="20px"
             />

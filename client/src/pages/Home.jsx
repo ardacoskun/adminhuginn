@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Heading, useToast } from "@chakra-ui/react";
 import { Loading, Networks } from "../components";
 import { authFetch } from "../../helpers/authFetch";
+import { useCookies } from "react-cookie";
 
 const Home = () => {
   const toast = useToast();
   const [networks, setNetworks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
 
   useEffect(() => {
     const getNetworks = async () => {

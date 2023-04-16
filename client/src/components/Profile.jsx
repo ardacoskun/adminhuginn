@@ -35,7 +35,7 @@ const Profile = (props) => {
               src="../images/avatar.jpg"
               alt="user"
               borderRadius="10px"
-              margin={!isDesktop ? "auto" : ""}
+              m={!isDesktop ? "auto" : ""}
             />
           </Box>
           <Box flex="1" display="flex" flexDirection="column" gap="15px">

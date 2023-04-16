@@ -7,6 +7,7 @@ import {
   ProfilePage,
   UsersPage,
   ProtectedRoute,
+  PublicRoute,
   SharedLayout,
   Error,
 } from "./pages";
@@ -16,8 +17,22 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/register"
+          element={
+            <PublicRoute>
+              <Register />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
         <Route
           path="/"
           element={
