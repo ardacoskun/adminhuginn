@@ -17,7 +17,7 @@ const ProfilePage = () => {
     console.log("user", user);
     try {
       const { status, data } = await authFetch.put(
-        `/user/${user?._id}`,
+        `/user/${user?._id ?? user?.id}`,
         values
       );
 
