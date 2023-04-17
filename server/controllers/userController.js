@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
 const getAllUsers = async (req, res) => {
@@ -26,9 +27,9 @@ const updateUser = async (req, res) => {
     //Create JWT Token
     const token = jwt.sign(
       {
-        userId: newUser._id,
-        email,
-        isAdmin,
+        userId: updatedUser._id,
+        email: req.body.email,
+        isAdmin: req.body.isAdmin,
       },
       process.env.JWT_KEY,
       {
@@ -36,10 +37,7 @@ const updateUser = async (req, res) => {
       }
     );
 
-    //Send cookie
-    attachCookie({ res, token });
-
-    return res.status(200).json(updatedUser);
+    return res.status(200).json({ user: updatedUser, token });
   } catch (error) {
     return res.status(500).send("Something went wrong!");
   }

@@ -39,6 +39,7 @@ const register = async (req, res) => {
 
     res.status(201).json({
       userDetails: {
+        id: newUser._id,
         username: newUser.username,
         email: newUser.email,
         isAdmin: true,
@@ -78,6 +79,7 @@ const login = async (req, res) => {
 
       return res.status(200).json({
         userDetails: {
+          id: user._id,
           username: user.username,
           email: user.email,
           isAdmin: user.isAdmin,
