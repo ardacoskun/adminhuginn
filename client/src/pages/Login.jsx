@@ -5,15 +5,18 @@ import { AuthForm } from "../components";
 import { loginSchema } from "../../schema/loginSchema";
 import { authFetch } from "../../helpers/authFetch";
 import { useCookies } from "react-cookie";
+import { useState } from "react";
 
 const Login = () => {
   const toast = useToast();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
 
   const onSubmit = async (values) => {
     const { username, ...others } = values;
     try {
+      setLoading(true);
       const res = await authFetch.post(`/auth/login`, others);
       if (res.status === 200 && res.data.userDetails) {
         const token = res.data.userDetails?.token;
@@ -26,10 +29,12 @@ const Login = () => {
           status: "success",
           description: `Welcome again ${res.data.userDetails?.username}`,
         });
+        setLoading(false);
         navigate("/");
         return;
       }
     } catch (error) {
+      setLoading(false);
       toast({
         title: "Error",
         status: "error",
@@ -54,6 +59,7 @@ const Login = () => {
       values={values}
       onSubmit={handleSubmit}
       errors={errors}
+      loading={loading}
     />
   );
 };

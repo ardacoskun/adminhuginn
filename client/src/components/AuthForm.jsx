@@ -16,7 +16,14 @@ import {
 import { Link } from "react-router-dom";
 import { PasswordField, Logo, CustomButton } from "../components";
 
-const AuthForm = ({ isLogin, handleChange, values, onSubmit, errors }) => {
+const AuthForm = ({
+  isLogin,
+  handleChange,
+  values,
+  onSubmit,
+  errors,
+  loading,
+}) => {
   return (
     <Container
       maxW="lg"
@@ -136,6 +143,7 @@ const AuthForm = ({ isLogin, handleChange, values, onSubmit, errors }) => {
             </HStack>
             <CustomButton
               text={isLogin ? "Login" : "Register"}
+              isLoading={loading}
               onClick={onSubmit}
             />
           </Stack>
@@ -149,10 +157,12 @@ AuthForm.prototypes = {
   isLogin: PropTypes.bool,
   handleChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
 };
 
 AuthForm.defaultProps = {
   isLogin: true,
+  loading: false,
 };
 
 export default AuthForm;
